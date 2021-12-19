@@ -46,7 +46,7 @@ changes somewhere.
 #### Program Process
 The program will be executed in the following order 
 1. Take the system input and convert it into acts list -> `[act lengths, act title]`, like this:
-```json
+```text
      [["30", "Bob Dylan & His Band"], ["45", "Post Malone"], ["60", "Mariya Takeuchi"] ...]
 ```
 
@@ -57,7 +57,7 @@ And use a `boolean[]` to avoid duplications.
 3. Print out the plan results.
 If we are able to find a valid plan from the input, the program will print out the information
 As in assignment requirements. The plan is only for 2 stages. So it will be stored like this
-```json
+```text
 [List[Morning], List[Afternoon], List[Morning], List[Afternoon]]
 ```
 ### Sample program output
