@@ -78,22 +78,26 @@ public class Main {
         // Print out the schedule plans
         public void printOutPlans(List<List<String[]>> plans){
             
-            // if plans is empty, then it means we can't find a valid solution
-            if (plans.size() == 0){
-                System.out.println("Can't find a valid plan.");
-            }
-            
-            for (int i=0;i<plans.size(); i++){
-                if (i%2==0){ // if i %2 == 0, then it means it is a morning plan
-                    System.out.println("Stage " + String.valueOf(i/2+1));
-                    printLines(plans.get(i), this.ranges[i][0]);
-                    System.out.println(this.schedule.get(this.ranges[i][0]));    
-                }else{
-                    // if i %2 == 1, then it means it is an afternoon plan
-                    printLines(plans.get(i), this.ranges[i][0]);
-                    System.out.println(this.schedule.get(this.ranges[i][0])); 
-                    System.out.println("-----------------------------");
+            try{
+                // if plans is empty, then it means we can't find a valid solution
+                if (plans.size() == 0){
+                    System.out.println("Can't find a valid plan.");
                 }
+
+                for (int i=0;i<plans.size(); i++){
+                    if (i%2==0){ // if i %2 == 0, then it means it is a morning plan
+                        System.out.println("Stage " + String.valueOf(i/2+1));
+                        printLines(plans.get(i), this.ranges[i][0]);
+                        System.out.println(this.schedule.get(this.ranges[i][0]));    
+                    }else{
+                        // if i %2 == 1, then it means it is an afternoon plan
+                        printLines(plans.get(i), this.ranges[i][0]);
+                        System.out.println(this.schedule.get(this.ranges[i][0])); 
+                        System.out.println("-----------------------------");
+                    }
+                }
+            }catch(Exception e){
+                System.out.println("Can't find a valid plan.");
             }
         }
 
@@ -115,37 +119,41 @@ public class Main {
         * 09:00AM One Ok Rock 60min
         */
         public void formatTime(int mins, int hour, String name, String len){
-            StringBuilder sb = new StringBuilder();
-            String[] line = new String[3];
+            try{
+                StringBuilder sb = new StringBuilder();
+                String[] line = new String[3];
 
-            if (hour < 10){
-                sb.append("0"+String.valueOf(hour));
-            }else if (hour > 12) {
-                sb.append("0"+ String.valueOf(hour%12));
-            }else{
-                sb.append(String.valueOf(hour));
+                if (hour < 10){
+                    sb.append("0"+String.valueOf(hour));
+                }else if (hour > 12) {
+                    sb.append("0"+ String.valueOf(hour%12));
+                }else{
+                    sb.append(String.valueOf(hour));
+                }
+                sb.append(":");
+                if (mins < 10){
+                    sb.append("0"+String.valueOf(mins));
+                }else{
+                    sb.append(String.valueOf(mins));
+                }
+
+                if (hour > 12){
+                    sb.append("PM");    
+                }else{
+                    sb.append("AM");
+                }
+
+                line[0] = sb.toString();
+                line[1] = name;
+                if (!name.equals("Special announcement")){
+                    line[2] = len + "min";
+                }else{
+                    line[2] = "";
+                }
+                System.out.println(String.join(" ", line));  
+            catch(Exception e){
+                System.out.println("time format is invalid");
             }
-            sb.append(":");
-            if (mins < 10){
-                sb.append("0"+String.valueOf(mins));
-            }else{
-                sb.append(String.valueOf(mins));
-            }
-            
-            if (hour > 12){
-                sb.append("PM");    
-            }else{
-                sb.append("AM");
-            }
-            
-            line[0] = sb.toString();
-            line[1] = name;
-            if (!name.equals("Special announcement")){
-                line[2] = len + "min";
-            }else{
-                line[2] = "";
-            }
-            System.out.println(String.join(" ", line));    
         }
 
         /** DFS to fill acts into groups, then fill groups into plans
