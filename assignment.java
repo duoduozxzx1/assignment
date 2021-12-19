@@ -151,7 +151,7 @@ public class Main {
                     line[2] = "";
                 }
                 System.out.println(String.join(" ", line));  
-            catch(Exception e){
+            }catch(Exception e){
                 System.out.println("time format is invalid");
             }
         }
