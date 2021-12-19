@@ -78,6 +78,11 @@ public class Main {
         // Print out the schedule plans
         public void printOutPlans(List<List<String[]>> plans){
             
+            // if plans is empty, then it means we can't find a valid solution
+            if (plans.size() == 0){
+                System.out.println("Can't find a valid plan.");
+            }
+            
             for (int i=0;i<plans.size(); i++){
                 if (i%2==0){ // if i %2 == 0, then it means it is a morning plan
                     System.out.println("Stage " + String.valueOf(i/2+1));
@@ -226,12 +231,16 @@ public class Main {
             try{
                 BufferedReader obj = new BufferedReader(new InputStreamReader(System.in)); 
                 String str = obj.readLine();
-                while (str != null){
+                while (str != null && !str.isEmpty()){
                     if (str.equals("Special announcement")){
                         str = str + " 5min";
                     }
                     inputs.add(str);
                     str = obj.readLine();
+                    // aviod empty lines
+                    while(str!= null && str.equals("")){
+                        str = obj.readLine();
+                    }
                 }
             }catch(IOException e){
                 System.out.println("no inputs!");
