@@ -51,6 +51,8 @@ Here is the [online editor](https://leetcode.com/playground/SBHsM3xm) where you 
 2. You can also download the project from git and run in local.\
 Run Configuration: `main.java` 
 Environment: `Java 17` and `OpenJDK 17.0.1`
+The output for local will look like this 
+![image](images/local.png)
 
 ## Design pattern
 
